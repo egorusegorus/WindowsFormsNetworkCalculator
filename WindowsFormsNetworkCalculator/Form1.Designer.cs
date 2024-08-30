@@ -100,11 +100,12 @@
             // 
             // listBox1
             // 
+            listBox1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
+            listBox1.ItemHeight = 14;
             listBox1.Location = new Point(12, 157);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(776, 289);
+            listBox1.Size = new Size(776, 284);
             listBox1.TabIndex = 1;
             // 
             // Form1

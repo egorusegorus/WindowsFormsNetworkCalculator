@@ -29,15 +29,18 @@ namespace WindowsFormsNetworkCalculator
 
             // Adresse ausgeben
             long ipv4 = IP4Helper.GetDez(adress);
-            string dezOctet = IP4Helper.GetBinOctet(ipv4);
+            string dezOctet = IP4Helper.GetDezOctet(ipv4);
             string binOctet = IP4Helper.GetBinOctet(ipv4);
 
-
+            WriteString("Adress: ", dezOctet, binOctet);
 
         }
         // Hilsmethode zum Schreiben einer Zeile in Listbox
-        private void WriteString(string bezeichnung, string decOctet = "",string bonOctet = "")
+        private void WriteString(string bezeichnung, string decOctet = "",string binOctet = "")
         {
+            string zeile = bezeichnung.PadLeft(18)+" "+decOctet.PadRight(18)+binOctet;
+
+            listBox1.Items.Add(zeile);
 
 
 
