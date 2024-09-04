@@ -38,17 +38,83 @@ namespace WindowsFormsNetworkCalculator
             string WildCardstr = WildCard[0] + "." + WildCard[1] + "." + WildCard[2] + "." + WildCard[3];
             int[] NetzwerkAdresse= NetzwerkAdresseMethode(SubmaskeInt,ipAdresse);
             string NetzwerkAdresseStr= NetzwerkAdresse[0] + "." + NetzwerkAdresse[1] + "." + NetzwerkAdresse[2] + "." + NetzwerkAdresse[3];
-            
-            WriteString("Adress:           ", dezOctet, binOctet);
-            WriteString("Netzerk Submaske: ", string.Join("."), Submaske);
-            WriteString("Wild Card: ", string.Join("."), WildCardstr);
-            WriteString("Netzweradresse: ", string.Join("."), NetzwerkAdresseStr);
-            WriteString("Erste freie Adresse: " + NetzwerkAdresse[0] + "." + NetzwerkAdresse[1] + "." + NetzwerkAdresse[2] + "." + (NetzwerkAdresse[3] +1));
-            WriteString("Letzte freie Adresse: " + NetzwerkAdresse[0]+".");//TODO
-            WriteString("Broadcast freie Adresse: ", string.Join("."), NetzwerkAdresseStr);
+            string ErsteFreieNetzwerkAdresseStr = NetzwerkAdresse[0] + "." + NetzwerkAdresse[1] + "." + NetzwerkAdresse[2] + "." + (NetzwerkAdresse[3] + 1);
+            int helpvar = NetzwerkAdresse[3] + 1;
+            int[] BroadCastAdresse = BroadCastAdresseArr(NetzwerkAdresse, SubmaskeInt);
+            string BroadCastAdresseStr= BroadCastAdresse[0] + "." + BroadCastAdresse[1] + "." + BroadCastAdresse[2] + "." + BroadCastAdresse[3];
+            int helpvar2 = (BroadCastAdresse[3] - 1);
+            string LetzeFreie = BroadCastAdresse[0] + "." + BroadCastAdresse[1] + "." + BroadCastAdresse[2] + "." + helpvar2;
 
+            WriteString("Adress:           ", dezOctet, binOctet);
+            WriteString("Netzwerk Submaske: ",
+    Submaske,
+    Convert.ToString(SubmaskeInt[0], 2).PadLeft(8, '0') + "." +
+    Convert.ToString(SubmaskeInt[1], 2).PadLeft(8, '0') + "." +
+    Convert.ToString(SubmaskeInt[2], 2).PadLeft(8, '0') + "." +
+    Convert.ToString(SubmaskeInt[3], 2).PadLeft(8, '0')
+);
+
+            WriteString("Wildcard: ",
+                WildCardstr,
+                Convert.ToString(WildCard[0], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(WildCard[1], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(WildCard[2], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(WildCard[3], 2).PadLeft(8, '0')
+            );
+
+            WriteString("Netzwerkadresse: ",
+                NetzwerkAdresseStr,
+                Convert.ToString(NetzwerkAdresse[0], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(NetzwerkAdresse[1], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(NetzwerkAdresse[2], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(NetzwerkAdresse[3], 2).PadLeft(8, '0')
+            );
+
+            WriteString("Erste freie Adresse: ",
+                ErsteFreieNetzwerkAdresseStr,
+                Convert.ToString(NetzwerkAdresse[0], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(NetzwerkAdresse[1], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(NetzwerkAdresse[2], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(helpvar, 2).PadLeft(8, '0')
+            );
+
+            WriteString("Letzte freie Adresse: ",
+                LetzeFreie,
+                Convert.ToString(BroadCastAdresse[0], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(BroadCastAdresse[1], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(BroadCastAdresse[2], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(helpvar2, 2).PadLeft(8, '0')
+            );
+
+            WriteString("Broadcast-Adresse: ",
+                BroadCastAdresseStr,
+                Convert.ToString(BroadCastAdresse[0], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(BroadCastAdresse[1], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(BroadCastAdresse[2], 2).PadLeft(8, '0') + "." +
+                Convert.ToString(helpvar2, 2).PadLeft(8, '0')
+            );
+
+            /*WriteString("Netzerk Submaske: ", Submaske, Convert.ToString(SubmaskeInt[0],2 )+"."+ Convert.ToString(SubmaskeInt[1], 2) + "." + Convert.ToString(SubmaskeInt[2], 2) + "." + Convert.ToString(SubmaskeInt[3], 2));
+            WriteString("Wild Card: ", WildCardstr, Convert.ToString(WildCard[0], 2) + "." + Convert.ToString(WildCard[1], 2) + "." + Convert.ToString(WildCard[2], 2) + "." + Convert.ToString(WildCard[3], 2));
+            WriteString("Netzweradresse: ", NetzwerkAdresseStr, Convert.ToString(NetzwerkAdresse[0], 2) + "." + Convert.ToString(NetzwerkAdresse[1], 2) + "." + Convert.ToString(NetzwerkAdresse[2], 2) + "." + Convert.ToString(NetzwerkAdresse[3], 2));
+            WriteString("Erste freie Adresse: " ,ErsteFreieNetzwerkAdresseStr, Convert.ToString(NetzwerkAdresse[0], 2) + "." + Convert.ToString(NetzwerkAdresse[1], 2) + "." + Convert.ToString(NetzwerkAdresse[2], 2) + "." + Convert.ToString((helpvar), 2));
+            WriteString("Letzte freie Adresse: " , LetzeFreie, Convert.ToString(BroadCastAdresse[0], 2) + "." + Convert.ToString(BroadCastAdresse[1], 2) + "." + Convert.ToString(BroadCastAdresse[2], 2) + "." + Convert.ToString((helpvar2), 2)) ;
+            WriteString("Broadcast freie Adresse: ", BroadCastAdresseStr, Convert.ToString(BroadCastAdresse[0], 2) + "." + Convert.ToString(BroadCastAdresse[1], 2) + "." + Convert.ToString(BroadCastAdresse[2], 2) + "." + Convert.ToString((helpvar2), 2) );
+            */
         }
-        
+
+        public int[] BroadCastAdresseArr(int[] NetzwerkAdresse, int[] Submaske)
+        {
+            int[] BroadCastAdresse =new int[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                
+                BroadCastAdresse[i] = NetzwerkAdresse[i] | (255 - Submaske[i]);
+            }
+
+            return BroadCastAdresse;
+        }
         public int[] IPAdresseArr(string adress)
         {
             string[] strParts = adress.Split('.');
@@ -166,7 +232,7 @@ namespace WindowsFormsNetworkCalculator
         // Hilsmethode zum Schreiben einer Zeile in Listbox
         private void WriteString(string bezeichnung, string decOctet = "",string binOctet = "")
         {
-            string zeile = bezeichnung.PadLeft(18)+" "+decOctet.PadRight(18)+binOctet;
+            string zeile = bezeichnung.PadRight(25)+" "+decOctet.PadRight(25)+binOctet;
 
             listBox1.Items.Add(zeile);
 
