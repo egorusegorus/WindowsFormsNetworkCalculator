@@ -224,8 +224,23 @@ namespace WindowsFormsNetworkCalculator
                 }
             }
 
+            //Alternative für obere for in line 191
 
-                return SubnetzMaske;
+            /*
+             int[] bitValues = { 0, 128, 192, 224, 240, 248, 252, 254 };
+
+                for (int i = 0; i < 4; i++)
+                    {
+                        if (SubnetzMaske[i] != 255 && SubnetzMaske[i] == 0)
+                            {
+                                    SubnetzMaske[i] = bitValues[remainingBits];
+                                    break;
+                            }
+                    }
+             */
+
+
+            return SubnetzMaske;
         }
 
 
