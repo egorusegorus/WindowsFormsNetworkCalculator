@@ -93,7 +93,7 @@ namespace WindowsFormsNetworkCalculator
                 Convert.ToString(BroadCastAdresse[2], 2).PadLeft(8, '0') + "." +
                 Convert.ToString(helpvar2, 2).PadLeft(8, '0')
             );
-
+            
             /*WriteString("Netzerk Submaske: ", Submaske, Convert.ToString(SubmaskeInt[0],2 )+"."+ Convert.ToString(SubmaskeInt[1], 2) + "." + Convert.ToString(SubmaskeInt[2], 2) + "." + Convert.ToString(SubmaskeInt[3], 2));
             WriteString("Wild Card: ", WildCardstr, Convert.ToString(WildCard[0], 2) + "." + Convert.ToString(WildCard[1], 2) + "." + Convert.ToString(WildCard[2], 2) + "." + Convert.ToString(WildCard[3], 2));
             WriteString("Netzweradresse: ", NetzwerkAdresseStr, Convert.ToString(NetzwerkAdresse[0], 2) + "." + Convert.ToString(NetzwerkAdresse[1], 2) + "." + Convert.ToString(NetzwerkAdresse[2], 2) + "." + Convert.ToString(NetzwerkAdresse[3], 2));
@@ -103,18 +103,23 @@ namespace WindowsFormsNetworkCalculator
             */
         }
 
+
+
+
         public int[] BroadCastAdresseArr(int[] NetzwerkAdresse, int[] Submaske)
         {
-            int[] BroadCastAdresse =new int[4];
-
+            int[] BroadCastAdresse = new int[4];
             for (int i = 0; i < 4; i++)
             {
                 
-                BroadCastAdresse[i] = NetzwerkAdresse[i] | (255 - Submaske[i]);
-            }
+                int WildCard = 255 - Submaske[i];
 
+                
+                BroadCastAdresse[i] = NetzwerkAdresse[i] | WildCard;
+            }
             return BroadCastAdresse;
         }
+
         public int[] IPAdresseArr(string adress)
         {
             string[] strParts = adress.Split('.');
